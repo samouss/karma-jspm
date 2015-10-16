@@ -21,7 +21,10 @@
             "or by running 'jspm dl-loader'.");
     }
 
-    System.config({ baseURL: 'base' });
+    // System.config({ baseURL: 'base' });
+    if ( !System.baseURL ) {
+        System.config({ baseURL: 'base' });
+    }
 
     var promises = [],
       stripExtension = typeof karma.config.jspm.stripExtension === 'boolean' ? karma.config.jspm.stripExtension : true;
@@ -47,7 +50,7 @@
         if(!karma.config.jspm.useBundles){
             System.bundles = [];
         }
-        
+
         // Load everything specified in loadFiles
         for (var i = 0; i < karma.config.jspm.expandedFiles.length; i++) {
             var modulePath = karma.config.jspm.expandedFiles[i];
